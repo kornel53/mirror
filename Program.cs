@@ -18,5 +18,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapGet("/ping", () => Results.Text("pong"));
+app.MapGet("/ping", () => Results.Text("pong!"));
 app.Run();
