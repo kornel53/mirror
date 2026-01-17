@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mirror
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mirror
+  template:
+    metadata:
+      labels:
+        app: mirror
+    spec:
+      containers:
+      - name: mirror
+        image: mirror:latest
+        ports:
+        - containerPort: 80
