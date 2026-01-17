@@ -15,5 +15,6 @@ spec:
       containers:
       - name: mirror
         image: mirror:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
