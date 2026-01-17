@@ -1,0 +1,35 @@
+name: Terraform Deploy to Local k8s
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # pozwala odpalić ręcznie
+
+jobs:
+  terraform:
+    runs-on: self-hosted  # musi wskazywać lokalny runner z dostępem do kubeconfig
+
+    steps:
+      # 1. Klon repo
+      - uses: actions/checkout@v4
+
+      # 2. Instalacja Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.7  # wersja jaką chcesz
+
+      # 3. Init Terraform
+      - name: Terraform Init
+        working-directory: terraform
+        run: terraform init
+
+      # 4. Plan (opcjonalnie)
+      - name: Terraform Plan
+        working-directory: terraform
+        run: terraform plan
+
+      # 5. Apply
+      - name: Terraform Apply
+        working-directory: terraform
+        run: terraform apply -auto-approve
